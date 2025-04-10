@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  usuario_id  String @unique
+  nombre      String
+  email       String @unique
+  contraseña String
+  telefono    String
+  foto_perfil String?
+
+  reservaciones String[] @db.ObjectId
+  publicaciones String[] @db.ObjectId
+  reseñas       String[] @db.ObjectId
+  mensajesEnviados String[] @db.ObjectId
+  mensajesRecibidos String[] @db.ObjectId
+}
+
+model Publicacion {
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  publicacion_id String @unique
+  usuarioId     String @db.ObjectId
+  titulo        String
+  descripcion   String
+  ubicacion     Ubicacion
+  precio_noche  String
+  imagenes      String[]
+
+  reservaciones String[] @db.ObjectId
+  reseñas       String[] @db.ObjectId
+}
+
+model Reservacion {
+  id             String @id @default(auto()) @map("_id") @db.ObjectId
+  reservacion_id String @unique
+  usuarios       String[] @db.ObjectId
+  publicacionId  String @db.ObjectId
+  fecha_inicio   DateTime
+  fecha_fin      DateTime
+  costo_total    Float
+  precioServicio String
+}
+
+model Reseña {
+  id             String @id @default(auto()) @map("_id") @db.ObjectId
+  id_reseña      String @unique
+  usuarioId      String @db.ObjectId
+  publicacionId  String @db.ObjectId
+  calificacion   Float
+  fecha_reseña   DateTime
+  comentario     String?
+}
+
+model Mensaje {
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  mensaje_id      String @unique
+  usuarioEmisorId String @db.ObjectId
+  usuarioReceptorId String @db.ObjectId
+  texto           String
+}
+
+type Ubicacion {
+  pais      String
+  ciudad    String
+  ubicacion String
+}
