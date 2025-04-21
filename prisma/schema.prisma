@@ -9,7 +9,6 @@ datasource db {
 
 model Usuario {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  usuarioId  String   @map("usuario_id") @unique @db.ObjectId
   nombre     String
   email      String   @unique
   telefono   String

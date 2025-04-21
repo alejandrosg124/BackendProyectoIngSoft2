@@ -4,5 +4,8 @@ import usuariosController from "../controllers/usuariosController.js";
 const router = Router();
 
 router.post("/usuarios", usuariosController.createUser);
+router.get("/usuarios", usuariosController.getAllUsers);
+router.get("/usuarios/:id", usuariosController.getUserById);
+router.delete("/usuarios/:id", usuariosController.deleteUserById);
 
 export default router;

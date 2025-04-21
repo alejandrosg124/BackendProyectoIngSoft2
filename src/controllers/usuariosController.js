@@ -1,34 +1,51 @@
 import { PrismaClient } from "@prisma/client";
-import { ObjectId } from "mongodb";
+import usuariosService from "../service/usuariosService.js"; 
 
 const prisma = new PrismaClient();
 
 const usuariosController = {
+  // crear user
   createUser: async (req, res) => {
     try {
-      const { nombre, email, contrasena, telefono, foto_perfil } = req.body;
-
-      const usuarioId = new ObjectId().toString();
-
-      const newUser = await prisma.usuario.create({
-        data: {
-          usuarioId,
-          nombre,
-          email,
-          contrasena,
-          telefono,
-          fotoPerfil: foto_perfil,
-        }
-      });
-
+      const newUser = await usuariosService.createUser(req.body);
       res.status(201).json(newUser);
+
     } catch (error) {
       console.error(error);
-      if (error.code === 'P2002') {
-        res.status(409).json({ error: "El email ya está en uso" });
-      } else {
-        res.status(500).json({ error: "Error creando usuario", details: error.message });
-      }
+      res.status(500).json({ error: "Error creando usuario", details: error.message });
+    }
+  },
+
+  // get all users
+  getAllUsers: async (req, res ) => {
+    try {
+      const users = await usuariosService.getAllUsers()
+      res.json(users);
+
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
+  // get user por id
+  getUserById: async (req,res) => {
+    try {
+      const user = await usuariosService.getUserById(req.params.id);
+      res.json(user);
+
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
+  // delete user por id
+  deleteUserById: async (req,res) => {
+    try {
+      const deletedUser = await usuariosService.deleteUserById(req.params.id);
+      res.json(deletedUser);
+
+    } catch(error) {
+      console.error(error);
     }
   }
 };
