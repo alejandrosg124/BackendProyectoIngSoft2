@@ -27,6 +27,25 @@ const publicacionesController = {
     }
   },
 
+  //get publication by id
+  getPublicationById: async (req, res) => {
+    try {
+      const publication = await publicacionesService.getPublicationById();
+      res.json(publication);
+    } catch(error) {
+      console.error(error);
+    }
+  },
+
+  //delete publication by id
+  deletePublicationById: async (req, res) => {
+    try {
+      
+    } catch(error) {
+      console.error(error);
+    }
+  }
+
 };
 
 export default publicacionesController;
