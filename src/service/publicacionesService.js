@@ -3,13 +3,15 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const publicacionesService = {
-    createPublications: async (data) => {
+    createPublication: async (data) => {
         const createData = {
-            nombre: data.nombre,
-            email: data.email,
-            contrasena: data.contrasena,
-            telefono: data.telefono,
-            fotoPerfil: data.foto_perfil,
+            publicacionId: data.publicacionId,
+            usuarioId: data.usuarioId,
+            titulo: data.titulo,
+            descripcion: data.descripcion,
+            ubicacion: data.ubicacion,
+            precioNoche: data.precioNoche,
+            imagenes: data.imagenes || [],
         };
         console.log("Creando publicacion con los datos = ", createData);
         return await prisma.publicacion.create({
@@ -30,11 +32,17 @@ const publicacionesService = {
     },
 
     deletePublicationById: async (id) => {
-        return await prisma.publicacion.delete({
-          where: {
-            id: id,
-          },
-        });
+        try {
+            const deleted = await prisma.publicacion.delete({
+                where: {
+                    id: id,
+                },
+            });
+            return deleted;
+        } catch (error) {
+            console.error("Error en deletePublicationById:", error);
+            throw error;
+        }
     },
 }
 

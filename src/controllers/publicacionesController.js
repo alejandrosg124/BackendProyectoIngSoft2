@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 const publicacionesController = {
   // crear publication
-    // no funcional todavía
+  // no funcional todavía
   createPublication: async (req, res) => {
     try {
       const newPublication = await publicacionesService.createPublication(req.body);
@@ -41,12 +41,13 @@ const publicacionesController = {
   },
 
   //delete publication by id 
-  // no funcional todavía
   deletePublicationById: async (req, res) => {
     try {
-
+      const deletedPublication = await publicacionesService.deletePublicationById(req.params.id);
+      res.status(200).json({ message: "Publicación eliminada correctamente", deletedPublication });
     } catch(error) {
       console.error(error);
+      res.status(500).json({ error: "Error eliminando la publicación", details: error.message });
     }
   }
 
