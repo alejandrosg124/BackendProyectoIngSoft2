@@ -20,7 +20,6 @@ model Usuario {
 
 model Publicacion {
   id            String     @id @default(auto()) @map("_id") @db.ObjectId
-  publicacionId String     @map("publicacion_id") @unique @db.ObjectId
   usuarioId     String     @map("usuario_id") @db.ObjectId
   titulo        String
   descripcion   String
@@ -39,7 +38,6 @@ type Ubicacion {
 
 model Resena {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  resenaId      String   @map("id_resena") @unique @db.ObjectId
   usuarioId     String   @map("usuario_id") @db.ObjectId
   publicacionId String   @map("publicacion_id") @db.ObjectId
   calificacion  Int
@@ -51,7 +49,6 @@ model Resena {
 
 model Mensaje {
   id                String @id @default(auto()) @map("_id") @db.ObjectId
-  mensajeId         String @map("mensaje_id") @unique @db.ObjectId
   usuarioReceptorId String @map("usuario_receptor") @db.ObjectId
   usuarioEmisorId   String @map("usuario_emisor") @db.ObjectId
   texto             String
@@ -61,7 +58,6 @@ model Mensaje {
 
 model Reservacion {
   id             String       @id @default(auto()) @map("_id") @db.ObjectId
-  reservacionId  String       @map("reservacion_id") @unique @db.ObjectId
   usuarios       UsuarioRol[]
   publicacionId  String       @map("publicacion_id") @db.ObjectId
   fechaInicio    DateTime     @map("fecha_inicio")
