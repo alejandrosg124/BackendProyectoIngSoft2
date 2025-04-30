@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 
 const publicacionesController = {
   // crear publication
+    // no funcional todavía
   createPublication: async (req, res) => {
     try {
       const newPublication = await publicacionesService.createPublication(req.body);
@@ -16,7 +17,7 @@ const publicacionesController = {
     }
   },
 
-  // get all publications
+  // get all publications 
   getAllPublications: async (req, res ) => {
     try {
       const publications = await publicacionesService.getAllPublications();
@@ -24,23 +25,26 @@ const publicacionesController = {
 
     } catch (error) {
       console.error(error);
+      res.status(500).json({ error: "Error obteniendo publicaciones", details: error.message });
     }
   },
 
   //get publication by id
   getPublicationById: async (req, res) => {
     try {
-      const publication = await publicacionesService.getPublicationById();
+      const publication = await publicacionesService.getPublicationById(req.params.id);
       res.json(publication);
     } catch(error) {
       console.error(error);
+      res.status(500).json({ error: "Error obteniendo la publicación", details: error.message });
     }
   },
 
-  //delete publication by id
+  //delete publication by id 
+  // no funcional todavía
   deletePublicationById: async (req, res) => {
     try {
-      
+
     } catch(error) {
       console.error(error);
     }

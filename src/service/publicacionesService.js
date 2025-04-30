@@ -20,6 +20,22 @@ const publicacionesService = {
     getAllPublications: async () => {
         return await prisma.publicacion.findMany();
     },
+
+    getPublicationById: async (id) => {
+        return await prisma.publicacion.findUnique({
+            where: {
+                id: id,
+              },
+        })
+    },
+
+    deletePublicationById: async (id) => {
+        return await prisma.publicacion.delete({
+          where: {
+            id: id,
+          },
+        });
+    },
 }
 
 export default publicacionesService;
