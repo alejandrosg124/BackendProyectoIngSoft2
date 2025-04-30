@@ -5,7 +5,6 @@ const prisma = new PrismaClient();
 
 const publicacionesController = {
   // crear publication
-  // no funcional todavía
   createPublication: async (req, res) => {
     try {
       const newPublication = await publicacionesService.createPublication(req.body);
@@ -51,6 +50,7 @@ const publicacionesController = {
     }
   },
 
+  //update publication by id
   updatePublicationById: async (req, res) => {
     try {
       const updatedPublication = await publicacionesService.updatePublicationById(req.params.id, req.body);

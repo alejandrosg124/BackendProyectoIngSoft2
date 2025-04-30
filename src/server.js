@@ -4,6 +4,7 @@ import cors from 'cors';
 import usuariosRoutes from './routes/usuariosRoutes.js';
 import authRoutes from "./routes/authRoutes.js";
 import publicacionesRoutes from "./routes/publicacionesRoutes.js";
+import cloudflareRoutes from './routes/cloudflareRoutes.js';
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(usuariosRoutes);
 app.use(authRoutes);
 app.use(publicacionesRoutes);
+app.use(cloudflareRoutes);
 
 app.get('/', (req, res) => {
     res.send('Tamo arribaa');

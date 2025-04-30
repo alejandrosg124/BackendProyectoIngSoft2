@@ -49,6 +49,7 @@ const usuariosController = {
     }
   },
 
+  //update user by id
   updateUserById: async (req, res) => {
     try {
       const updatedUser = await usuariosService.updateUserById(req.params.id, req.body);
