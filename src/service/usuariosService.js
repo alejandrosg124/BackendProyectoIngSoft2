@@ -41,6 +41,23 @@ const usuariosService = {
       },
     });
   },
+  updateUserById: async (id, data) => {
+    try {
+      const updateData = { ...data };
+      if (data.contrasena) {
+        const hashedPassword = await bcrypt.hash(data.contrasena, 10);
+        updateData.contrasena = hashedPassword;
+      }
+      const updatedUser = await prisma.usuario.update({
+        where: { id: id },
+        data: updateData,
+      });
+      return updatedUser;
+    } catch (error) {
+      console.error("Error en updateUserById:", error);
+      throw error;
+    }
+  },
 };
 
 export default usuariosService;

@@ -44,6 +44,19 @@ const publicacionesService = {
             throw error;
         }
     },
-}
+
+    updatePublicationById: async (id, data) => {
+        try {
+            const updatedPublication = await prisma.publicacion.update({
+                where: { id: id },
+                data: data,
+            });
+            return updatedPublication;
+        } catch (error) {
+            console.error("Error en updatePublicationById:", error);
+            throw error;
+        }
+    },
+};
 
 export default publicacionesService;
