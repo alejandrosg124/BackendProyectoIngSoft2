@@ -5,6 +5,7 @@ import usuariosRoutes from './routes/usuariosRoutes.js';
 import authRoutes from "./routes/authRoutes.js";
 import publicacionesRoutes from "./routes/publicacionesRoutes.js";
 import cloudflareRoutes from './routes/cloudflareRoutes.js';
+import reservacionesRoutes from './routes/reservacionesRoutes.js';
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(usuariosRoutes);
 app.use(authRoutes);
 app.use(publicacionesRoutes);
 app.use(cloudflareRoutes);
+app.use(reservacionesRoutes);
 
 app.get('/', (req, res) => {
     res.send('Tamo arribaa');
